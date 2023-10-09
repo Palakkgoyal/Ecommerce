@@ -7,13 +7,26 @@ import { formatCurrencyString, useShoppingCart } from "use-shopping-cart"
 import { Button } from "@/components/ui/button"
 
 export function CartSummary() {
-  const { formattedTotalPrice, totalPrice, cartDetails, cartCount } = useShoppingCart()
+  const { formattedTotalPrice, totalPrice, cartDetails, cartCount, redirectToCheckout } = useShoppingCart()
   const [isLoading, setLoading] = useState(false)
   const isDisabled = isLoading || cartCount! === 0
-  const shippingAmount = cartCount! > 0 ? 5000 : 0
+  const shippingAmount = cartCount! > 0 ? 500 : 0
   const totalAmount = totalPrice! + shippingAmount
 
-  function onCheckout() {}
+  async function onCheckout() {
+    setLoading(true)
+    const response = await fetch('/api/checkout', {
+      method: "POST",
+      body: JSON.stringify(cartDetails),
+    })
+
+    const data = await response.json()
+    const result = await redirectToCheckout(data.id)
+    if(result?.error) {
+      console.error(result)
+    }
+    setLoading(false)
+  }
 
   return (
     <section
@@ -37,7 +50,7 @@ export function CartSummary() {
         </div>
         <div className="flex items-center justify-between border-t border-gray-200 pt-4 dark:border-gray-600">
           <dt className="text-base font-medium">Order total</dt>
-          <dd className="text-base font-medium">{formatCurrencyString({ value: totalAmount, currency: 'INR'})}</dd>
+          <dd className="text-base font-medium">{formatCurrencyString({ value: totalAmount, currency: 'USD'})}</dd>
         </div>
       </dl>
 
