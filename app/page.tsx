@@ -56,7 +56,7 @@ export default async function Page({ searchParams }: Props) {
             <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
               {products.length} result{products.length === 1 ? "" : "s"}
             </h1>
-            {/* Product Sort */}
+            
             <ProductSort />
           </div>
 

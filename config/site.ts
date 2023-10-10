@@ -5,10 +5,10 @@ export const siteConfig = {
   description: "Beautifully designed, handmade resin art and crafts",
   footer: [
     { name: "Home", href: "/" },
-    { name: "About", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
-    { name: "Shipping & Return Policy", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-    { name: "FAQ", href: "#" },
+    { name: "About", href: "/about" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
+    { name: "Shipping & Return Policy", href: "/shipping-and-return-policy" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "FAQ", href: "/faq" },
   ],
 }
