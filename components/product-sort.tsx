@@ -21,9 +21,9 @@ import {
 import { ProductFilters } from "@/components/product-filters"
 
 const sortOptions = [
-  { name: "Newest", value: "/?date=desc" },
-  { name: "Price, low to high", value: "/?price=asc" },
-  { name: "Price, high to low", value: "/?price=desc" },
+  { name: "Newest", value: "/products?date=desc" },
+  { name: "Price, low to high", value: "/products?price=asc" },
+  { name: "Price, high to low", value: "/products?price=desc" },
 ]
 
 export function ProductSort() {

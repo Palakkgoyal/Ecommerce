@@ -3,13 +3,10 @@ import { groq } from "next-sanity"
 
 import { SanityProduct } from "@/config/inventory"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { ProductFilters } from "@/components/product-filters"
-import { ProductGrid } from "@/components/product-grid"
 import FollowOn from "@/components/followOn"
 import Testimonials from "@/components/testimonials"
 import NewArrival from "@/components/new-arrival"
-import { ProductSort } from "@/components/product-sort"
+
 import { seedSanityData } from "@/lib/seed"
 
 interface Props {
@@ -23,17 +20,17 @@ interface Props {
 }
 
 export default async function Page({ searchParams }: Props) {
-  const { date = "desc", price, category, size, search } = searchParams;
+  // const { date = "desc", price, category, size, search } = searchParams;
 
-  const priceOrder = price ? `| order(price ${price})` : ""
-  const dateOrder = date ? `| order(_createdAt ${date})` : ""
-  const order = `${priceOrder}${dateOrder}`
+  // const priceOrder = price ? `| order(price ${price})` : ""
+  // const dateOrder = date ? `| order(_createdAt ${date})` : ""
+  // const order = `${priceOrder}${dateOrder}`
 
-  const productFilter = `_type == "product"`
-  const categoryFilter = category ? `&& "${category}" in categories` : ""
-  const sizeFilter = size ? `&& "${size}" in sizes` : ""
-  const searchFilter = search ? `&& name match "${search}"` : ""
-  const filter = `*[${productFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
+  // const productFilter = `_type == "product"`
+  // const categoryFilter = category ? `&& "${category}" in categories` : ""
+  // const sizeFilter = size ? `&& "${size}" in sizes` : ""
+  // const searchFilter = search ? `&& name match "${search}"` : ""
+  // const filter = `*[${productFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
 
   // const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order} {
   //   _id,
@@ -47,7 +44,7 @@ export default async function Page({ searchParams }: Props) {
   //   "slug": slug.current
   // }`)
 
-  const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...10] {
+  const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...7] {
     _id,
     _createdAt,
     name,
