@@ -12,7 +12,6 @@ export async function seedSanityData() {
       currency: item.currency,
       description: item.description,
       price: item.price,
-      sku: item.sku,
       sizes: item.sizes,
       categories: item.categories,
     }
