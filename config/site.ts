@@ -2,7 +2,8 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "Craft Gallery",
-  description: "Beautifully designed, handmade resin art and crafts",
+  description1: "Your ideas and preferences, combined with our creativity...",
+  description2: "Providing you High-quality products in affordable price.",
   footer: [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },

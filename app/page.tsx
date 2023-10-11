@@ -8,6 +8,7 @@ import { ProductFilters } from "@/components/product-filters"
 import { ProductGrid } from "@/components/product-grid"
 import FollowOn from "@/components/followOn"
 import Testimonials from "@/components/testimonials"
+import NewArrival from "@/components/new-arrival"
 import { ProductSort } from "@/components/product-sort"
 import { seedSanityData } from "@/lib/seed"
 
@@ -50,15 +51,15 @@ export default async function Page({ searchParams }: Props) {
     <div>
       <div className="px-4 pt-20 text-center">
         <h1 className="text-4xl font-extrabold tracking-normal">{siteConfig.name}</h1>
-        <p className="mx-auto mt-4 max-w-3xl text-base">{siteConfig.description}</p>
+        <p className="mx-auto mt-4 max-w-3xl text-base">{siteConfig.description1}</p>
+        <p className="mx-auto max-w-3xl text-base">{siteConfig.description2}</p>
       </div>
       <div>
-        <main className="mx-auto max-w-6xl px-6">
+        {/* <main className="mx-auto max-w-6xl px-6">
           <div className="flex items-center justify-between border-b border-gray-200 pb-4 pt-24 dark:border-gray-800">
             <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
               {products.length} result{products.length === 1 ? "" : "s"}
             </h1>
-            
             <ProductSort />
           </div>
 
@@ -73,7 +74,8 @@ export default async function Page({ searchParams }: Props) {
               <ProductGrid products={products} />
             </div>
           </section>
-        </main>
+        </main> */}
+        <NewArrival />
         <FollowOn />
         <Testimonials />
       </div>
