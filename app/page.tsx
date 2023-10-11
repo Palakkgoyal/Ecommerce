@@ -6,6 +6,8 @@ import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { ProductFilters } from "@/components/product-filters"
 import { ProductGrid } from "@/components/product-grid"
+import FollowOn from "@/components/followOn"
+import Testimonials from "@/components/testimonials"
 import { ProductSort } from "@/components/product-sort"
 import { seedSanityData } from "@/lib/seed"
 
@@ -72,6 +74,8 @@ export default async function Page({ searchParams }: Props) {
             </div>
           </section>
         </main>
+        <FollowOn />
+        <Testimonials />
       </div>
     </div>
   )
