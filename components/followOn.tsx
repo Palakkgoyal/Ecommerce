@@ -1,5 +1,6 @@
 import React from "react"
-
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function FollowOn() {
     return (
@@ -9,6 +10,11 @@ export default function FollowOn() {
                 <iframe src='https://widgets.sociablekit.com/linkedin-profile-posts/iframe/204773' frameBorder='0' scrolling='no' className="border-[2px] w-full h-[380px] md:w-[500px] md:h-[250px]"></iframe>
                 <iframe src='https://widgets.sociablekit.com/instagram-feed/iframe/204793' frameBorder='0' scrolling='no' className="border-[2px] w-full h-[380px] md:w-[500px] md:h-[250px]"></iframe>
             </div>
+            <Link href="/about">
+                <Button variant="outline">
+                    About us
+                </Button>
+            </Link>
         </div>
     )
 }
