@@ -12,7 +12,7 @@ import NewArrival from "@/components/new-arrival"
 import { ProductSort } from "@/components/product-sort"
 import { seedSanityData } from "@/lib/seed"
 
-interface Props { 
+interface Props {
   searchParams: {
     date?: string
     price?: string
@@ -23,19 +23,31 @@ interface Props {
 }
 
 export default async function Page({ searchParams }: Props) {
-  const { date="desc", price, category, size, search } = searchParams;
+  const { date = "desc", price, category, size, search } = searchParams;
 
-  const priceOrder = price? `| order(price ${price})` : ""
-  const dateOrder = date? `| order(_createdAt ${date})` : ""
+  const priceOrder = price ? `| order(price ${price})` : ""
+  const dateOrder = date ? `| order(_createdAt ${date})` : ""
   const order = `${priceOrder}${dateOrder}`
 
   const productFilter = `_type == "product"`
-  const categoryFilter = category? `&& "${category}" in categories` : ""
-  const sizeFilter = size? `&& "${size}" in sizes` : ""
-  const searchFilter = search? `&& name match "${search}"` : ""
+  const categoryFilter = category ? `&& "${category}" in categories` : ""
+  const sizeFilter = size ? `&& "${size}" in sizes` : ""
+  const searchFilter = search ? `&& name match "${search}"` : ""
   const filter = `*[${productFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
 
-  const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order} {
+  // const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order} {
+  //   _id,
+  //   _createdAt,
+  //   name,
+  //   sku,
+  //   images,
+  //   currency,
+  //   price,
+  //   description,
+  //   "slug": slug.current
+  // }`)
+
+  const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...10] {
     _id,
     _createdAt,
     name,
@@ -45,7 +57,7 @@ export default async function Page({ searchParams }: Props) {
     price,
     description,
     "slug": slug.current
-  }`)
+ }`)
 
   return (
     <div>
@@ -75,7 +87,8 @@ export default async function Page({ searchParams }: Props) {
             </div>
           </section>
         </main> */}
-        <NewArrival />
+
+        <NewArrival products={products} />
         <FollowOn />
         <Testimonials />
       </div>

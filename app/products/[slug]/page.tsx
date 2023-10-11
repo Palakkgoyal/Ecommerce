@@ -33,7 +33,6 @@ export default async function Page({ params }: Props) {
       <div className="mx-auto max-w-2xl lg:max-w-none">
         {/* Product */}
         <div className="pb-20 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12">
-          {/* Product gallery */}
           <ProductGallery product={product} />
           <ProductInfo product={product} />
         </div>

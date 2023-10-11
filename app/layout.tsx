@@ -11,7 +11,7 @@ import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
   title: siteConfig.name,
-  description: siteConfig.description,
+  description: siteConfig.description1,
   icons: {
     icon: '/favicon.ico'
   }

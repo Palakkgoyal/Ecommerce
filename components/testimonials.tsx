@@ -15,7 +15,7 @@ export default function Testimonials() {
     return (
         <div className="flex flex-col gap-[20px] px-4 my-[80px]">
             <h2 className="text-2xl font-bold tracking-normal">What Other Say About Us</h2>
-            <div className="flex flex-row gap-[12px] overflow-x-scroll ">
+            <div className="flex flex-row gap-[12px] overflow-x-scroll no-scrollbar">
                 {testimonialsArr.map((img) => (
                     <Image
                         src={img}
