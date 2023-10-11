@@ -17,13 +17,13 @@ const [selectedImage, setSelectedImage] = useState(0)
   return (
     <div className="flex flex-col-reverse">
       {/* Image Grid */}
-      <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
-        <ul className="grid grid-cols-4 gap-6">
+      <div className="mx-auto mt-6 w-full max-w-2xl sm:block lg:max-w-none">
+        <ul className="grid grid-cols-4 gap-2 lg:gap-6">
           {product.images.map((image, index) => (
             <div
               key={image._key as string}
               onClick={() => setSelectedImage(index)}
-              className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase hover:bg-gray-50"
+              className="relative ml-3 flex h-[60px] w-[60px] lg:h-24 lg:w-auto lg:ml-0 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase hover:bg-gray-50"
             >
               <span className="absolute inset-0 overflow-hidden rounded-md">
                 <Image
