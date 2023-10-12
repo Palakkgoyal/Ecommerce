@@ -6,10 +6,10 @@ import { siteConfig } from "@/config/site"
 import FollowOn from "@/components/followOn"
 import Testimonials from "@/components/testimonials"
 import NewArrival from "@/components/new-arrival"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-import { seedSanityData } from "@/lib/seed"
 export default async function Page() {
-
   const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...7] {
     _id,
     _createdAt,
@@ -28,6 +28,11 @@ export default async function Page() {
         <h1 className="text-4xl font-extrabold tracking-normal">{siteConfig.name}</h1>
         <p className="mx-auto mt-4 max-w-3xl text-base">{siteConfig.description1}</p>
         <p className="mx-auto max-w-3xl text-base">{siteConfig.description2}</p>
+        <Link href="/products">
+          <Button variant="default" className="mt-7">
+            Get Now
+          </Button>
+        </Link>
       </div>
       <div>
         <NewArrival products={products} />
