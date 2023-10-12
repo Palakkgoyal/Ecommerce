@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site"
 import FollowOn from "@/components/followOn"
 import Testimonials from "@/components/testimonials"
 import NewArrival from "@/components/new-arrival"
+import Collab from "@/components/collab"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -36,6 +37,7 @@ export default async function Page() {
       </div>
       <div>
         <NewArrival products={products} />
+        <Collab />
         <FollowOn />
         <Testimonials />
       </div>
