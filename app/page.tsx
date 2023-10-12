@@ -9,17 +9,17 @@ import NewArrival from "@/components/new-arrival"
 
 import { seedSanityData } from "@/lib/seed"
 
-interface Props {
-  searchParams: {
-    date?: string
-    price?: string
-    category?: string
-    size?: string
-    search?: string
-  }
-}
+// interface Props {
+//   searchParams: {
+//     date?: string
+//     price?: string
+//     category?: string
+//     size?: string
+//     search?: string
+//   }
+// }
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page() {
   // const { date = "desc", price, category, size, search } = searchParams;
 
   // const priceOrder = price ? `| order(price ${price})` : ""

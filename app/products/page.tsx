@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react"
 import { client } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
@@ -13,13 +11,13 @@ import { ProductSort } from "@/components/product-sort"
 
 interface Props {
     searchParams: {
-        date?: string
-        price?: string
-        category?: string
-        size?: string
-        search?: string
+      date?: string
+      price?: string
+      category?: string
+      size?: string
+      search?: string
     }
-}
+  }
 
 
 export default async function Page({ searchParams }: Props) {

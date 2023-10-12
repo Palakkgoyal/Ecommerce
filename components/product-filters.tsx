@@ -25,6 +25,7 @@ const filters = [
       { value: "string art", label: "String Art" },
       { value: "gift hamper", label: "Gift Hamper" },
       { value: "tray", label: "Tray" },
+      { value: "keychain", label: "keychain" },
     ],
   },
   {
