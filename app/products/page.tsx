@@ -7,17 +7,17 @@ import { cn } from "@/lib/utils"
 import { ProductFilters } from "@/components/product-filters"
 import { ProductGrid } from "@/components/product-grid"
 import { ProductSort } from "@/components/product-sort"
-// import { SearchBar } from "@/components/search-bar"
+import { SearchBar } from "@/components/search-bar"
 
 interface Props {
     searchParams: {
-      date?: string
-      price?: string
-      category?: string
-      size?: string
-      search?: string
+        date?: string
+        price?: string
+        category?: string
+        size?: string
+        search?: string
     }
-  }
+}
 
 
 export default async function Page({ searchParams }: Props) {
@@ -32,7 +32,7 @@ export default async function Page({ searchParams }: Props) {
     const sizeFilter = size ? `&& "${size}" in sizes` : ""
     const searchFilter = search ? `&& name match "${search}"` : ""
     const filter = `*[${productFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
-    
+
     const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order} {
     _id,
     _createdAt,
@@ -47,9 +47,9 @@ export default async function Page({ searchParams }: Props) {
 
     return (
         <div>
-            
             <main className="mx-auto max-w-6xl px-6">
-                <div className="flex items-center justify-between border-b border-gray-200 pb-4 pt-24 dark:border-gray-800">
+                <SearchBar />
+                <div className="flex items-center justify-between border-b border-gray-200 pb-4 pt-10 dark:border-gray-800">
                     <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
                         {products.length} result{products.length === 1 ? "" : "s"}
                     </h1>
