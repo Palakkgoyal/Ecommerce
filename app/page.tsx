@@ -8,41 +8,7 @@ import Testimonials from "@/components/testimonials"
 import NewArrival from "@/components/new-arrival"
 
 import { seedSanityData } from "@/lib/seed"
-
-// interface Props {
-//   searchParams: {
-//     date?: string
-//     price?: string
-//     category?: string
-//     size?: string
-//     search?: string
-//   }
-// }
-
 export default async function Page() {
-  // const { date = "desc", price, category, size, search } = searchParams;
-
-  // const priceOrder = price ? `| order(price ${price})` : ""
-  // const dateOrder = date ? `| order(_createdAt ${date})` : ""
-  // const order = `${priceOrder}${dateOrder}`
-
-  // const productFilter = `_type == "product"`
-  // const categoryFilter = category ? `&& "${category}" in categories` : ""
-  // const sizeFilter = size ? `&& "${size}" in sizes` : ""
-  // const searchFilter = search ? `&& name match "${search}"` : ""
-  // const filter = `*[${productFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
-
-  // const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order} {
-  //   _id,
-  //   _createdAt,
-  //   name,
-  //   sku,
-  //   images,
-  //   currency,
-  //   price,
-  //   description,
-  //   "slug": slug.current
-  // }`)
 
   const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...7] {
     _id,
@@ -64,27 +30,6 @@ export default async function Page() {
         <p className="mx-auto max-w-3xl text-base">{siteConfig.description2}</p>
       </div>
       <div>
-        {/* <main className="mx-auto max-w-6xl px-6">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-4 pt-24 dark:border-gray-800">
-            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
-              {products.length} result{products.length === 1 ? "" : "s"}
-            </h1>
-            <ProductSort />
-          </div>
-
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            <h2 id="products-heading" className="sr-only">
-              Products
-            </h2>
-            <div className={cn("grid grid-cols-1 gap-x-8 gap-y-10", products.length > 0 ? 'lg:grid-cols-4' : 'lg:grid-cols-[1fr_3fr]')}>
-              <div className="hidden lg:block">
-                <ProductFilters />
-              </div>
-              <ProductGrid products={products} />
-            </div>
-          </section>
-        </main> */}
-
         <NewArrival products={products} />
         <FollowOn />
         <Testimonials />

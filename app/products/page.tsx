@@ -32,7 +32,7 @@ export default async function Page({ searchParams }: Props) {
     const sizeFilter = size ? `&& "${size}" in sizes` : ""
     const searchFilter = search ? `&& name match "${search}"` : ""
     const filter = `*[${productFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
-
+    
     const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order} {
     _id,
     _createdAt,
@@ -45,7 +45,6 @@ export default async function Page({ searchParams }: Props) {
     "slug": slug.current
   }`)
 
-  console.log("Something is happening!")
     return (
         <div>
             
