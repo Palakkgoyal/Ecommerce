@@ -25,8 +25,9 @@ export default function Page() {
         const isValid = validateEmail()
         if (!isValid) {
             toast({
-                title: `Invalid Email ❌`,
+                title: `Invalid Email`,
                 description: "Please enter a valid email!",
+                variant: "destructive"
             })
             return;
         }
