@@ -27,7 +27,7 @@ export default function Collab() {
                             type="button"
                             className="w-40 mt-[30px] md:mt-[15px] bg-violet-600 py-6 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
                         >
-                            View More
+                            Let's Collab
                         </Button>
                     </Link>
                 </div>

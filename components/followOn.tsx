@@ -11,7 +11,9 @@ export default function FollowOn() {
                 <iframe src='https://widgets.sociablekit.com/instagram-feed/iframe/204793' frameBorder='0' scrolling='no' className="border-[2px] w-full h-[380px] md:w-[500px] md:h-[250px]"></iframe>
             </div>
             <Link href="/about">
-                <Button variant="outline">
+                <Button
+                    className="w-40 mt-[30px] md:mt-[15px] bg-violet-600 py-6 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                >
                     About us
                 </Button>
             </Link>

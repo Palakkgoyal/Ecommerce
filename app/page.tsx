@@ -31,7 +31,7 @@ export default async function Page() {
         <p className="mx-auto max-w-3xl text-base">{siteConfig.description2}</p>
         <Link href="/products">
           <Button variant="default" className="mt-7">
-            Get Now
+            Shop Now
           </Button>
         </Link>
       </div>
