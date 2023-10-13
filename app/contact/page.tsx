@@ -8,7 +8,7 @@ import { ContactText } from "@/components/contact-text";
 export default function Page() {
     return (
         <div>
-            <div className="flex px-3 flex-col items-center md:items-start my-20 justify-evenly gap-7 md:flex-row">
+            <div className="my-20 flex flex-col items-center justify-evenly gap-7 px-3 md:flex-row md:items-start">
                 <div>
                     <Image
                         placeholder="blur"
@@ -17,10 +17,10 @@ export default function Page() {
                         alt="Contact Mahi Craft Gallery"
                         width={400}
                         height={600}
-                        className="w-300px md:w-[400px] md:h-[600px] rounded-[50px]"
+                        className="w-300px rounded-[50px] md:h-[600px] md:w-[400px]"
                     />
                 </div>
-                <div className="w-full max-w-[500px] flex flex-col">
+                <div className="flex w-full max-w-[500px] flex-col">
                     <ContactText />
                     <ContactInput />
                 </div>
