@@ -74,7 +74,7 @@ export function ProductFilters() {
                         id={`filter-${section.id}-${idx}`}
                         checked={searchValues.some(([key, value]) => key === section.id && value === option.value)}
                         onClick={(event) => {
-                          const params = new URLSearchParams(searchParams)
+                          const params = new URLSearchParams(searchParams.toString())
                           const checked = event.currentTarget.dataset.state === "checked"                   
                           checked ? params.delete(section.id) : params.set(section.id, option.value)
                           router.replace(`/products?${params.toString()}`)
