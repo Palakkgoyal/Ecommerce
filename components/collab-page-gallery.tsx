@@ -14,7 +14,7 @@ export function CollabPageGallery() {
 
     return (
         <div>
-            <div className="columns-3 pt-9 mb-10 lg:mb-20 max-w-7xl mx-auto gap-0">
+            <div className="mx-auto mb-10 max-w-7xl columns-3 gap-0 pt-9 lg:mb-20">
                 {images.map(img => (
                     <Image
                         placeholder="blur"
