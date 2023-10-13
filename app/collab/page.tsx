@@ -72,7 +72,7 @@ export default function Page() {
                         name="collabEmail"
                         type="email"
                         placeholder="Enter Your Email"
-                        className="h-9 w-full max-w-[500px] mr-2"
+                        className="mr-2 h-9 w-full max-w-[500px]"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
