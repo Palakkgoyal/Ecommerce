@@ -10,11 +10,11 @@ export default function Page() {
 
     return (
         <div>
-            <div className="max-w-7xl mx-auto my-[80px] flex flex-col items-center px-5">
-                <h1 className="text-2xl md:text-4xl text-center leading-normal max-w-[22ch]">{collabConfig.name} {collabConfig.name2}</h1>
-                <p className="text-center text-base md:text-lg mt-3 max-w-[30ch] md:max-w-[40ch]">{collabConfig.description}</p>
+            <div className="mx-auto my-[80px] flex max-w-7xl flex-col items-center px-5">
+                <h1 className="max-w-[22ch] text-center text-2xl leading-normal md:text-4xl">{collabConfig.name} {collabConfig.name2}</h1>
+                <p className="mt-3 max-w-[30ch] text-center text-base md:max-w-[40ch] md:text-lg">{collabConfig.description}</p>
                 <p className="font-medium">{collabConfig.note}</p>
-                <form onSubmit={onSubmit} className="items-center inline-flex mt-5 w-full justify-center">
+                <form onSubmit={onSubmit} className="mt-5 inline-flex w-full items-center justify-center">
                     <Input
                         id="collabEmail"
                         name="collabEmail"
