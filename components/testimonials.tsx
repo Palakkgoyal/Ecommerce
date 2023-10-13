@@ -13,9 +13,9 @@ import tm7 from "@/public/products/tm7.jpg"
 export default function Testimonials() {
     const testimonialsArr = [tm1, tm2, tm3, tm4, tm5, tm6, tm7]
     return (
-        <div className="flex flex-col gap-[20px] px-4 my-[80px]">
+        <div className="my-[80px] flex flex-col gap-[20px] px-4">
             <h2 className="text-2xl font-bold tracking-normal">What Other Say About Us</h2>
-            <div className="flex flex-row gap-[12px] overflow-x-scroll no-scrollbar">
+            <div className="no-scrollbar flex flex-row gap-[12px] overflow-x-scroll">
                 {testimonialsArr.map((img) => (
                     <Image
                         src={img}

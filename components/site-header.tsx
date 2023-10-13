@@ -59,7 +59,7 @@ export function SiteHeader() {
           )}
         </div>
       </div>
-      <a href="https://wa.me/+918989517165" className="fixed bottom-4 right-4 border-[2px] border-solid p-2 rounded-full bg-slate-200">
+      <a href="https://wa.me/+918989517165" className="fixed bottom-4 right-4 rounded-full border-[2px] border-solid bg-slate-200 p-2">
         <MessageSquare />
       </a>
     </header>

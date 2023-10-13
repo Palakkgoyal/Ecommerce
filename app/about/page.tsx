@@ -11,8 +11,8 @@ export default function Page() {
 
     return (
         <div>
-            <div className="px-4 pt-20 mb-20">
-                <div className="flex gap-3 flex-col items-center justify-center lg:justify-evenly lg:flex-row">
+            <div className="mb-20 px-4 pt-20">
+                <div className="flex flex-col items-center justify-center gap-3 lg:flex-row lg:justify-evenly">
                     <div className="lg:w-1/2">
                         <Image
                             src={ownerImg}
@@ -26,9 +26,9 @@ export default function Page() {
                             )}`}
                         />
                     </div>
-                    <div className="flex flex-col max-w-[500px] lg:w-1/2">
+                    <div className="flex max-w-[500px] flex-col lg:w-1/2">
                         <h2 className="text-2xl md:text-3xl">{aboutConfig.heading}</h2>
-                        <h2 className="text-2xl md:text-3xl max-w-[25ch]">{aboutConfig.heading2}</h2>
+                        <h2 className="max-w-[25ch] text-2xl md:text-3xl">{aboutConfig.heading2}</h2>
                         <p className="mt-4 max-w-[40ch]">{aboutConfig.description}</p>
                         <Link href="/contact" className="mt-5">
                             <Button type="button" variant="default">

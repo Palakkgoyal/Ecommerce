@@ -16,8 +16,8 @@ export function SearchBar() {
         router.replace(`/products?search=${searchQuery}`)
       }
     return (
-        <div className="mx-auto flex justify-center mt-10">
-            <form onSubmit={onSubmit} className="items-center inline-flex">
+        <div className="mx-auto mt-10 flex justify-center">
+            <form onSubmit={onSubmit} className="inline-flex items-center">
                 <Input
                     id="search"
                     name="search"

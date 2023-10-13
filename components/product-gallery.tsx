@@ -23,7 +23,7 @@ const [selectedImage, setSelectedImage] = useState(0)
             <div
               key={image._key as string}
               onClick={() => setSelectedImage(index)}
-              className="relative ml-3 flex h-[60px] w-[60px] lg:h-24 lg:w-auto lg:ml-0 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase hover:bg-gray-50"
+              className="relative ml-3 flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase hover:bg-gray-50 lg:ml-0 lg:h-24 lg:w-auto"
             >
               <span className="absolute inset-0 overflow-hidden rounded-md">
                 <Image
