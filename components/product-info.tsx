@@ -35,9 +35,7 @@ export function ProductInfo({ product }: Props) {
       )
     })
    }
-
-   console.log(product.dimension)
-
+   
   return (
     <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
       <h1 className="text-3xl font-bold tracking-tight">{product.name}</h1>
