@@ -12,17 +12,16 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export default async function Page() {
-  const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...7] {
-    _id,
-    _createdAt,
-    name,
-    sku,
-    images,
-    currency,
-    price,
-    description,
-    "slug": slug.current
- }`)
+//   const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] | order(_createdAt desc) [0...7] {
+//     _id,
+//     _createdAt,
+//     name,
+//     images,
+//     currency,
+//     price,
+//     description,
+//     "slug": slug.current
+//  }`)
 
   return (
     <div>
@@ -37,7 +36,7 @@ export default async function Page() {
         </Link>
       </div>
       <div>
-        <NewArrival products={products} />
+        {/* <NewArrival products={products} /> */}
         <Offer />
         <Collab />
         <FollowOn />
