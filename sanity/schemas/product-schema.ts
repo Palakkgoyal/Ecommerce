@@ -9,13 +9,13 @@ export const product = defineType({
             name: "name",
             title: "Name",
             type: "string",
-            // validation: Rule => Rule.required().min(10).max(140)
+            validation: Rule => Rule.required()
         }),
         {
             name: "slug",
             title: "Slug",
             type: "slug",
-            // validation: Rule => Rule.required().min(10).max(140),
+            validation: Rule => Rule.required(),
             options: {
                 source: "name",
                 maxLength: 200,
@@ -29,14 +29,19 @@ export const product = defineType({
             name: "images",
             title: "Images",
             type: "array",
-            of: [{ type: "image" }]
+            of: [{ type: "image" }],
+            validation: Rule => Rule.required()
         },
         {
             name: "categories",
             title: "Categories",
             type: "array",
             initialValue: ['keychain'],
-            of: [{ type: "string" }]
+            of: [{ type: "string" }],
+            options: {
+                list: ['frames', 'jewellery', 'phone accessories', 'hoops', 'clock', 'bookmark', 'rakhi', 'string art', 'gift hamper', 'tray', 'keychain']
+            },
+            validation: Rule => Rule.required()
         },
         {
             name: "dimension",
@@ -48,8 +53,8 @@ export const product = defineType({
             name: "description",
             title: "Description",
             type: "string",
-            initialValue: "Describe your product"
-            // validation: Rule => Rule.required().min(10).max(500)
+            initialValue: "Describe your product",
+            validation: Rule => Rule.required()
         },
         {
             name: "currency",
@@ -61,8 +66,8 @@ export const product = defineType({
             name: "price",
             title: "Price",
             type: "number",
-            initialValue: 10000
-            // validation: Rule => Rule.required().min(1)
+            initialValue: 10000,
+            validation: Rule => Rule.required()
         },
     ]   
 })
