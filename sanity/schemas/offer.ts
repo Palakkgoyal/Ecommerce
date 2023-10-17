@@ -25,5 +25,15 @@ export const offer = defineType({
             initialValue: "Describe your product",
             validation: Rule => Rule.required()
         },
+        {
+            name: "showOnHomePage",
+            title: "Show On Home Page",
+            type: "string",
+            initialValue: "false",
+            validation: Rule => Rule.required(),
+            options: {
+                list: ['y', 'n']
+            }
+        },
     ]   
 })
