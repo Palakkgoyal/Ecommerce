@@ -18,3 +18,9 @@ export interface SanityProduct extends Omit<InventoryProduct, "images"> {
   slug: string
   images: Image[]
 }
+
+export interface SanityOffers extends Omit<InventoryProduct, "images"> {
+  _id: string
+  _createdAt: Date
+  images: Image[]
+}
