@@ -25,12 +25,13 @@ export const offer = defineType({
             validation: Rule => Rule.required()
         },
         {
-            name: "type",
-            title: "Type",
+            name: "category",
+            title: "Category",
             type: "string",
             options: {
                 list: ['seasonal', 'bulk', 'other']
             },
+            validation: Rule => Rule.required()
         },
         {
             name: "showOnHomePage",
