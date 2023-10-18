@@ -8,7 +8,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { urlForImage } from "@/sanity/lib/image"
 
-export default function Offer() {
+export default function OfferSlider() {
   const [current, setCurrent] = useState<Number>(0)
   const [offers, setOffers] = useState([])
 

@@ -11,8 +11,8 @@ export function OfferFilters() {
     return (
         <form className="px-4 flex justify-center mt-8">
             <ul className="flex gap-8">
-                {filters.map((filter) => (
-                    <li className="cursor-pointer" onClick={() => {
+                {filters.map((filter, idx) => (
+                    <li className="cursor-pointer" key={`${filter}-${idx}`} onClick={() => {
                         const params = new URLSearchParams(searchParams.toString())
                         params.set("offer", filter)
                         router.replace(`/offers?${params.toString()}`)

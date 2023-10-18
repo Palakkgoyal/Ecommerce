@@ -7,7 +7,7 @@ import FollowOn from "@/components/followOn"
 import Testimonials from "@/components/testimonials"
 import NewArrival from "@/components/new-arrival"
 import Collab from "@/components/collab"
-import Offer from "@/components/offer"
+import OfferSlider from "@/components/offer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -37,7 +37,7 @@ export default async function Page() {
       </div>
       <div>
         <NewArrival products={products} />
-        <Offer />
+        <OfferSlider />
         <Collab />
         <FollowOn />
         <Testimonials />
