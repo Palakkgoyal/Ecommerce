@@ -12,25 +12,16 @@ export const resource = defineType({
             validation: Rule => Rule.required()
         }),
         {
-            name: "images",
-            title: "Images",
-            type: "array",
-            of: [{ type: "image" }],
-            validation: Rule => Rule.required()
-        },
-        {
-            name: "currency",
-            title: "Currency",
+            name: "videoLink",
+            title: "YouTube Video Link",
             type: "string",
-            initialValue: "INR",
             validation: Rule => Rule.required()
         },
         {
-            name: "price",
-            title: "Price",
-            type: "number",
-            initialValue: 10000,
-            validation: Rule => Rule.required()
-        },
+            name: "description",
+            title: "Resource Description",
+            type: "string"
+            
+        }
     ]   
 })

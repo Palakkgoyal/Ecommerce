@@ -28,5 +28,11 @@ export interface SanityOffers extends Omit<InventoryProduct, "images"> {
 export interface SanityResources extends Omit<InventoryProduct, "images"> {
   _id: string
   _createdAt: Date
+  videoLink: string
+}
+
+export interface SanityMaterial extends Omit<InventoryProduct, "images"> {
+  _id: string
+  _createdAt: Date
   images: Image[]
 }
