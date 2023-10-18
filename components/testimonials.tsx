@@ -16,11 +16,12 @@ export default function Testimonials() {
         <div className="my-[80px] flex flex-col gap-[20px] px-4">
             <h2 className="text-2xl font-bold tracking-normal">What Other Say About Us</h2>
             <div className="no-scrollbar flex flex-row gap-[12px] overflow-x-scroll">
-                {testimonialsArr.map((img) => (
+                {testimonialsArr.map((img, idx) => (
                     <Image
                         src={img}
                         width={300}
                         height={400}
+                        key={idx}
                         alt=""
                         className="rounded-lg"
                         placeholder="blur"

@@ -42,5 +42,4 @@ export default function Offers({ offers }: Props) {
         </div>
       ))}
     </div>
-  )
-}
+  )}
