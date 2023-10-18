@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Edit, ShoppingBag, MessageSquare } from "lucide-react"
 import { useShoppingCart } from "use-shopping-cart"
 
@@ -17,7 +17,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between space-x-4 px-6 sm:space-x-0">
+      <div className="mx-auto flex h-12 md:h-16 max-w-6xl items-center justify-between space-x-4 px-6 sm:space-x-0">
         <MainNav />
         <div className="flex items-center space-x-1">
           <Link href="/cart">
@@ -37,9 +37,9 @@ export function SiteHeader() {
           )}
         </div>
       </div>
-      <a href="https://wa.me/+918989517165" className="fixed bottom-4 right-4 rounded-full border-[2px] border-solid bg-slate-200 p-2">
+      <Link href="https://wa.me/+918989517165" className="fixed bottom-4 right-4 rounded-full border-[2px] border-solid bg-slate-200 p-2">
         <MessageSquare />
-      </a>
+      </Link>
     </header>
   )
 }

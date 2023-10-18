@@ -8,6 +8,8 @@ import { Providers } from "@/components/providers"
 import { SiteBlob } from "@/components/site-blob"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { SiteFooterMenu } from "@/components/site-footer-menu"
+
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -37,6 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <SiteHeader />
               <SiteBlob />
               <div className="flex-1">{children}</div>
+              <SiteFooterMenu />
               <SiteFooter />
             </div>
           </Providers>
