@@ -29,7 +29,7 @@ export const offer = defineType({
             title: "Type",
             type: "string",
             options: {
-                list: ['seasonal', 'all', 'bulk', 'other']
+                list: ['seasonal', 'bulk', 'other']
             },
         },
         {

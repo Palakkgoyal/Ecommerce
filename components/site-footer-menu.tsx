@@ -4,8 +4,8 @@ import Link from "next/link"
 
 export function SiteFooterMenu() {
     return (
-        <header className="sticky bottom-0 z-40 w-full bg-background  sm:hidden">
-            <div className="mx-auto flex h-10 max-w-6xl items-center justify-between border-t">
+        <header className="sticky bottom-0 z-40 w-full bg-background rounded-lg  sm:hidden">
+            <div className="mx-auto flex h-12 max-w-6xl items-center rounded-[inherit] justify-between border-t">
                 <Link href="/" className="border-r w-full h-full flex justify-center items-center">
                     <Home />
                 </Link>
