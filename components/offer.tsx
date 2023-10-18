@@ -5,7 +5,6 @@ import { client } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 import { shimmer, toBase64 } from "@/lib/image"
 import Image from "next/image"
-import heroImg from "@/public/collab/c2.jpg"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { urlForImage } from "@/sanity/lib/image"
 
@@ -18,6 +17,7 @@ export default function Offer() {
 
     async function orderOffers() {
       const tempOffers:any = await getOffers()
+      console.log(tempOffers, "offers")
       setOffers(tempOffers)
     }
 
@@ -42,7 +42,7 @@ export default function Offer() {
   }
 
   return (
-    <div className="border-[2px] border-solid border-red-500 max-w-7xl overflow-hidden relative mx-auto">
+    <div className="max-w-7xl overflow-hidden relative mx-auto">
       <div className="w-full my-8 h-full mx-auto max-h-[700px] flex relative transition-transform ease-in-out"
         style={{
           transform: `translateX(-${+current * 100}%)`
