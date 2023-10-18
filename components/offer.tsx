@@ -42,14 +42,14 @@ export default function OfferSlider() {
   }
 
   return (
-    <div className="max-w-7xl overflow-hidden relative mx-auto">
-      <div className="w-full my-8 h-full mx-auto max-h-[700px] flex relative transition-transform ease-in-out"
+    <div className="relative mx-auto max-w-7xl overflow-hidden">
+      <div className="relative mx-auto my-8 flex h-full max-h-[700px] w-full transition-transform ease-in-out"
         style={{
           transform: `translateX(-${+current * 100}%)`
         }}
       >
         {offers.map((offer:any) => (
-        <div className="min-w-full max-h-full overflow-hidden" key={offer._id}>
+        <div className="max-h-full min-w-full overflow-hidden" key={offer._id}>
           <Image
             src={urlForImage(offer.images[0]).url()}
             placeholder="blur"
@@ -57,12 +57,12 @@ export default function OfferSlider() {
             alt="demo Image"
             width={400}
             height={700}
-            className="min-w-full max-w-full max-h-full aspect-video"
+            className="aspect-video max-h-full min-w-full max-w-full"
           />
         </div>
         ))}
       </div>
-      <div className="flex w-full h-full justify-between items-center top-0 left-0 absolute bg-black-300 z-[4]">
+      <div className="bg-black-300 absolute left-0 top-0 z-[4] flex h-full w-full items-center justify-between">
         <ChevronLeft className="cursor-pointer" onClick={slideLeft} />
         <ChevronRight className="cursor-pointer" onClick={slideRight} />
       </div>

@@ -15,7 +15,7 @@ export function OfferFilters() {
     }
 
     return (
-        <form className="px-4 flex justify-center mt-8">
+        <form className="mt-8 flex justify-center px-4">
             <ul className="flex gap-8">
                 {filters.map((filter, idx) => (
                     <li className="cursor-pointer" key={`${filter}-${idx}`} 

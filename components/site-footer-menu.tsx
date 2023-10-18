@@ -4,18 +4,18 @@ import Link from "next/link"
 
 export function SiteFooterMenu() {
     return (
-        <header className="sticky bottom-0 z-40 w-full bg-background rounded-lg  sm:hidden">
-            <div className="mx-auto flex h-12 max-w-6xl items-center rounded-[inherit] justify-between border-t">
-                <Link href="/" className="border-r w-full h-full flex justify-center items-center">
+        <header className="sticky bottom-0 z-40 w-full rounded-lg bg-background  sm:hidden">
+            <div className="mx-auto flex h-12 max-w-6xl items-center justify-between rounded-[inherit] border-t">
+                <Link href="/" className="flex h-full w-full items-center justify-center border-r">
                     <Home />
                 </Link>
-                <Link href="/products" className="border-r w-full h-full flex justify-center items-center">
+                <Link href="/products" className="flex h-full w-full items-center justify-center border-r">
                     <Store />
                 </Link>
-                <Link href="/offers" className="border-r w-full h-full flex justify-center items-center">
+                <Link href="/offers" className="flex h-full w-full items-center justify-center border-r">
                     <BadgePercent />
                 </Link>
-                <Link href="/user" className="border-r w-full h-full flex justify-center items-center">
+                <Link href="/user" className="flex h-full w-full items-center justify-center border-r">
                     <User />
                 </Link>
             </div>
