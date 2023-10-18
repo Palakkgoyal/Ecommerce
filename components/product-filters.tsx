@@ -28,18 +28,6 @@ const filters = [
       { value: "keychain", label: "keychain" },
     ],
   },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "xs", label: "X-Small" },
-      { value: "s", label: "Small" },
-      { value: "m", label: "Medium" },
-      { value: "l", label: "Large" },
-      { value: "xl", label: "X-Large" },
-      { value: "one-size", label: "One Size" },
-    ],
-  },
 ]
 
 export function ProductFilters() {
