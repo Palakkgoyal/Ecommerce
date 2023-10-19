@@ -10,7 +10,7 @@ export default async function Page() {
         _id,
         _createdAt,
         name,
-        videoLink,
+        videoId,
         description,
      }`)
     return (

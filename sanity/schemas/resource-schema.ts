@@ -12,8 +12,8 @@ export const resource = defineType({
             validation: Rule => Rule.required()
         }),
         {
-            name: "videoLink",
-            title: "YouTube Video Link",
+            name: "videoId",
+            title: "YouTube Video Id",
             type: "string",
             validation: Rule => Rule.required()
         },
