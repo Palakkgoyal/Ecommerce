@@ -9,6 +9,7 @@ import { SiteBlob } from "@/components/site-blob"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooterMenu } from "@/components/site-footer-menu"
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 
 export const metadata: Metadata = {
@@ -28,22 +29,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <Providers>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <SiteBlob />
-              <div className="flex-1">{children}</div>
-              <SiteFooter />
-              <SiteFooterMenu />
-            </div>
-          </Providers>
-        </body>
+        <UserProvider>
+          <body
+            className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable
+            )}
+          >
+            <Providers>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <SiteBlob />
+                <div className="flex-1">{children}</div>
+                <SiteFooter />
+                <SiteFooterMenu />
+              </div>
+            </Providers>
+          </body>
+        </UserProvider>
       </html>
     </>
   )
