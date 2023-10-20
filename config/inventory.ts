@@ -36,3 +36,9 @@ export interface SanityMaterial extends Omit<InventoryProduct, "images"> {
   _createdAt: Date
   images: Image[]
 }
+
+export interface SanityAddress extends Omit<InventoryProduct, "images"> {
+  _id: string
+  _createdAt: Date
+  email: string
+}

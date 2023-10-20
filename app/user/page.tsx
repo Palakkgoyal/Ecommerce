@@ -1,16 +1,25 @@
 import React from "react"
 import Link from "next/link"
+import Login from "@/components/login";
+import { getSession } from '@auth0/nextjs-auth0';
 
-export default function Page() {
+export default async function Page() {
+    const res = await getSession();
+    const user = res?.user
+    
     return (
-        <div>
-            <Link href="/api/auth/login">Login</Link>
-            {" "}
-            <Link href="/api/auth/logout">Logout</Link>
-        </div>
-    )
+        user ? (
+            <div>
+                <img src={user.picture} alt={user.name} />
+                <h2>{user.name}</h2>
+                <p>{user.email}</p>
+                <Link href="/api/auth/logout">Logout</Link>
+            </div>
+        ) : (
+            <Login />
+        )
+    );
 }
-
 
 // 'use client';
 
@@ -32,7 +41,7 @@ export default function Page() {
 //       )
 //   );
 // }
-import { getSession } from '@auth0/nextjs-auth0';
+// import { getSession } from '@auth0/nextjs-auth0';
 
 // export default async function Page() {
 //   const { user } = await getSession();
