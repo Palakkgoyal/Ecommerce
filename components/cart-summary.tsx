@@ -1,33 +1,15 @@
 "use client"
-
-import { useState } from "react"
-import { Loader2 } from "lucide-react"
 import { formatCurrencyString, useShoppingCart } from "use-shopping-cart"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 
 export function CartSummary() {
-  const { totalPrice, cartDetails, cartCount, redirectToCheckout } = useShoppingCart()
-  const [isLoading, setLoading] = useState(false)
-  const isDisabled = isLoading || cartCount! === 0
+  const { totalPrice, cartDetails, cartCount } = useShoppingCart()
+  const isDisabled = cartCount! === 0
   const shippingAmount = cartCount! > 0 ? 5000 : 0
   const totalAmount = totalPrice! + shippingAmount
 
-  async function onCheckout() {
-    setLoading(true)
-    const response = await fetch('/api/checkout', {
-      method: "POST",
-      body: JSON.stringify(cartDetails),
-    })
-
-    const data = await response.json()
-    const result = await redirectToCheckout(data.id)
-    if (result?.error) {
-      console.error(result)
-    }
-    setLoading(false)
-  }
 
   return (
     <section
@@ -55,17 +37,14 @@ export function CartSummary() {
         </div>
       </dl>
 
-      {/* <div className="mt-6">
-        <Button onClick={onCheckout} disabled={isDisabled} className="w-full">
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {isLoading? "Loading..." : "Checkout"}
-        </Button>
-      </div> */}
+      <div className="mt-6">
+        <Link href="/payment">
+          <Button disabled={isDisabled} className="w-full">Checkout</Button>
+        </Link>
+      </div>
       <div className="mt-6">
         <Link href="https://wa.me/+918989517165">
-          <Button disabled={isDisabled} className="w-full">
-            Order On Whatsapp
-          </Button>
+          <Button disabled={isDisabled} className="w-full">Order On Whatsapp</Button>
         </Link>
       </div>
     </section>

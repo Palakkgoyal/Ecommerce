@@ -1,27 +1,25 @@
-import { NextResponse } from "next/server"
-// @ts-ignore
-import { validateCartItems } from "use-shopping-cart/utilities"
+import { NextResponse, NextRequest } from "next/server";
+import Stripe from "stripe";
 
-// import { inventory } from "@/config/inventory"
-import { stripe } from "@/lib/stripe"
+const stripe = new Stripe(process.env.STRIPE_SECRET_TEST_KEY!, {
+  typescript: true,
+  apiVersion: "2022-11-15",
+});
 
-export async function POST(request: Request) {
-    // const cartDetails = await request.json()
-    // const lineItems = validateCartItems(inventory, cartDetails)
-    // const origin = request.headers.get('origin')
-    // const session = await stripe.checkout.sessions.create({
-    //     submit_type: "pay",
-    //     mode: "payment",
-    //     payment_method_types: ['card'],
-    //     line_items: lineItems,
-    //     shipping_address_collection: {
-    //         allowed_countries: ['US']
-    //     },
-    //     billing_address_collection: "auto",
-    //     success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${origin}/cart`,
-    // })
+export async function POST(req: NextRequest) {
+  const { data, address } = await req.json();
+  const { amount } = data;
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Number(amount) * 100,
+      currency: "INR",
+      shipping: address,
+    });
 
-    // return NextResponse.json(session)
-    return true
+    return new NextResponse(paymentIntent.client_secret, { status: 200 });
+  } catch (error: any) {
+    return new NextResponse(error, {
+      status: 400,
+    });
+  }
 }
