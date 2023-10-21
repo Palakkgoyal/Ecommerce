@@ -10,9 +10,7 @@ export default function PaymentForm() {
   const elements = useElements();
   const { cartDetails } = useShoppingCart()
 
-  
   const cartArr = Object.entries(cartDetails!)
-  console.log(cartArr)
   
   //Get the total amount of the items purchased
   const orderAmt = cartArr.map((item) => (item[1].price / 100) * item[1].quantity).reduce((a, b) => a + b)
@@ -24,7 +22,10 @@ export default function PaymentForm() {
     const cardElement = elements?.getElement("card");
     const addressElement = elements?.getElement("address")
 
-    const { complete, value } = await addressElement?.getValue();
+    const addressData = await addressElement?.getValue();
+    const complete = addressData?.complete
+    const value = addressData?.value
+
     try {
       if (!stripe || !cardElement || !complete) {
         return null
@@ -39,7 +40,8 @@ export default function PaymentForm() {
         payment_method: { card: cardElement },
       });
 
-      console.log(res, 'res')
+      // TODO: add order data to sanity
+      // console.log(res, 'res')
     } catch (error) {
       console.log(error);
     }
