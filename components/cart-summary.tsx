@@ -1,12 +1,15 @@
 "use client"
 import { formatCurrencyString, useShoppingCart } from "use-shopping-cart"
 import Link from "next/link"
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 import { Button } from "@/components/ui/button"
 
 export function CartSummary() {
-  const { totalPrice, cartDetails, cartCount } = useShoppingCart()
-  const isDisabled = cartCount! === 0
+  const { totalPrice, cartCount } = useShoppingCart()
+  const { user } = useUser();
+  console.log(!user)
+  const isDisabled = !user || cartCount! === 0
   const shippingAmount = cartCount! > 0 ? 5000 : 0
   const totalAmount = totalPrice! + shippingAmount
 
@@ -38,7 +41,7 @@ export function CartSummary() {
       </dl>
 
       <div className="mt-6">
-        <Link href="/payment">
+        <Link href={`/${user ? "payment" : "user"}`}>
           <Button disabled={isDisabled} className="w-full">Checkout</Button>
         </Link>
       </div>
