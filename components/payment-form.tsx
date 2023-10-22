@@ -5,12 +5,16 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button"
 import { useShoppingCart } from "use-shopping-cart"
 import { useUser } from '@auth0/nextjs-auth0/client';
+import Loader from "./loader"
 
 export default function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
   const { cartDetails } = useShoppingCart()
   const { user } = useUser();
+  const [loading, setLoading] = useState<Boolean>(false)
+
+  console.log(loading, "loading")
 
   const cartArr = Object.entries(cartDetails!)
   const orderData = cartArr.map((item) => ({
@@ -30,6 +34,7 @@ export default function PaymentForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     const cardElement = elements?.getElement("card");
     const addressElement = elements?.getElement("address")
 
@@ -38,6 +43,7 @@ export default function PaymentForm() {
     const value = addressData?.value
     try {
       if (!stripe || !cardElement || !complete) {
+        setLoading(false)
         return null
       }
       const { data } = await axios.post("/api/checkout", {
@@ -51,7 +57,7 @@ export default function PaymentForm() {
       });
 
       if (res?.paymentIntent?.status === "succeeded") {
-        const address = [{...value?.address, _key: "address_key"}]
+        const address = [{ ...value?.address, _key: "address_key" }]
         const orders = orderData
         const data = {
           name: value?.name,
@@ -66,6 +72,9 @@ export default function PaymentForm() {
     } catch (error) {
       console.log(error);
     }
+    finally {
+      setLoading(false)
+    }
   };
 
   async function createOrder(orderData: any, address: any, orders: any) {
@@ -77,10 +86,10 @@ export default function PaymentForm() {
   }
 
   return (
-    <div className="mx-auto my-10 max-w-7xl rounded-lg border-[2px] border-solid py-5 ">
+    <div className="relative mx-auto my-10 max-w-7xl rounded-lg border-[2px] border-solid py-5 ">
       <div>
-        <h1 className="text-center">
-          Pay: {orderAmt}(Order Amount) + {shippingAmt}(Shipping) = {orderTotal}₹
+        <h1 className="text-center font-semibold ">
+          Pay: {orderTotal}₹
         </h1>
       </div>
       <form onSubmit={onSubmit} className="flex flex-col gap-5 p-5">
@@ -96,8 +105,10 @@ export default function PaymentForm() {
         <div id="card-element" className="form-control">
           <CardElement className="rounded-md border-[2px] bg-white p-3" />
         </div>
-        <button type="submit">Submit</button>
+        {/* <button type="submit">Submit</button> */}
+        <Button variant="default" className="w-full max-w-[500px] mx-auto">Submit</Button>
       </form>
+      {loading && <Loader text="Please do not refresh..." />}
     </div>
   );
 }
