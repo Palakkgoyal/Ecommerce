@@ -6,22 +6,22 @@ export function SiteFooterMenu() {
     return (
         <header className="sticky bottom-0 z-40 w-full rounded-lg bg-background  sm:hidden">
             <div className="mx-auto flex h-12 max-w-6xl items-center justify-between rounded-[inherit] border-t">
-                <Link href="/" className="flex flex-col h-full w-full items-center justify-center">
+                <Link href="/" className="flex h-full w-full flex-col items-center justify-center">
                     <Home className="h-5" />
                     <p className="text-[10px]">Home</p>
                 </Link>
-                <Link href="/resources" className="flex flex-col h-full w-full items-center justify-center">
+                <Link href="/resources" className="flex h-full w-full flex-col items-center justify-center">
                     <GraduationCap  />
                     <p className="text-[10px]">Learn</p>
                 </Link>
-                <Link href="/products" className="flex mb-4 h-full w-full items-center justify-center">
-                    <span className="fit-content rounded-full border-[5px] border-solid p-2 bg-[hsl(var(--background))]"><Store /></span>
+                <Link href="/products" className="mb-4 flex h-full w-full items-center justify-center">
+                    <span className="fit-content rounded-full border-[5px] border-solid bg-[hsl(var(--background))] p-2"><Store /></span>
                 </Link>
-                <Link href="/offers" className="flex flex-col h-full w-full items-center justify-center">
+                <Link href="/offers" className="flex h-full w-full flex-col items-center justify-center">
                     <BadgePercent />
                     <p className="text-[10px]">Offers</p>
                 </Link>
-                <Link href="/user" className="flex flex-col h-full w-full items-center justify-center">
+                <Link href="/user" className="flex h-full w-full flex-col items-center justify-center">
                     <User className="h-5" />
                     <p className="text-[10px]">Me</p>
                 </Link>

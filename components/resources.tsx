@@ -7,10 +7,10 @@ interface Props {
 
 export default function Resources({ resources }: Props) {
     return (
-        <div className="flex mx-5 my-8 gap-8 flex-wrap justify-evenly">
+        <div className="mx-5 my-8 flex flex-wrap justify-evenly gap-8">
             {resources.map((resource) => {
                 return (
-                    <div key={resource._id} className="flex p-4 flex-col justify-center items-center rounded-lg w-full max-w-[400px] border-[2px]">
+                    <div key={resource._id} className="flex w-full max-w-[400px] flex-col items-center justify-center rounded-lg border-[2px] p-4">
                         <div><h2 className="font-medium capitalize">{resource.name}</h2></div>
                         <div>
                             <iframe width="560" height="315"

@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button"
 
 export default function Login() {
     return (
-        <div className="flex justify-center items-center w-full">
-            <div className="border-[2px] mt-10">
+        <div className="flex w-full items-center justify-center">
+            <div className="mt-10 border-[2px]">
                 <h1>Login/Signup</h1>
                 <p>Please login to continue</p>
                 <Link href="/api/auth/login">

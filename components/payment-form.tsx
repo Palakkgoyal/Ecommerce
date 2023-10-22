@@ -77,13 +77,13 @@ export default function PaymentForm() {
   }
 
   return (
-    <div className="border-[2px] rounded-lg max-w-7xl py-5 my-10 mx-auto border-solid ">
+    <div className="mx-auto my-10 max-w-7xl rounded-lg border-[2px] border-solid py-5 ">
       <div>
         <h1 className="text-center">
           Pay: {orderAmt}(Order Amount) + {shippingAmt}(Shipping) = {orderTotal}₹
         </h1>
       </div>
-      <form onSubmit={onSubmit} className="p-5 flex flex-col gap-5">
+      <form onSubmit={onSubmit} className="flex flex-col gap-5 p-5">
         <AddressElement options={{
           mode: 'shipping',
           allowedCountries: ['IN'],
@@ -94,7 +94,7 @@ export default function PaymentForm() {
         />
         <label htmlFor="card-element">Credit or debit card</label>
         <div id="card-element" className="form-control">
-          <CardElement className="border-[2px] p-3 rounded-md bg-white" />
+          <CardElement className="rounded-md border-[2px] bg-white p-3" />
         </div>
         <button type="submit">Submit</button>
       </form>
