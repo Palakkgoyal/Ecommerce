@@ -18,8 +18,6 @@ export async function POST(req: NextRequest) {
 
     return new NextResponse(paymentIntent.client_secret, { status: 200 });
   } catch (error: any) {
-    return new NextResponse(error, {
-      status: 400,
-    });
+    return new NextResponse(error, { status: 400 });
   }
 }

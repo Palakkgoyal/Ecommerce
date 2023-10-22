@@ -26,7 +26,7 @@ export default function NewArrival({ products }: Props) {
                   <Image
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(255, 280))}`}
-                    src={urlForImage(product.images[0]).url()}
+                    src={urlForImage(product?.images[0])?.url()}
                     alt={product.name}
                     width={230}
                     height={280}

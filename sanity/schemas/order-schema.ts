@@ -25,6 +25,7 @@ export const order = defineType({
                         { type: "string", name: "line2" },
                         { type: "string", name: "postal_code" },
                         { type: "string", name: "state" },
+                        { type: "string", name: "country" },
                     ]
                 }
             ],
@@ -37,6 +38,12 @@ export const order = defineType({
             validation: Rule => Rule.required()
         },
         {
+            name: 'email',
+            title: "email",
+            type: 'string',
+            validation: Rule => Rule.required()
+        },
+        {
             name: "orders",
             title: "Orders By Customer",
             type: 'array',
@@ -45,7 +52,7 @@ export const order = defineType({
                     type: "object",
                     name: "inline",
                     fields: [
-                        { type: "string", name: "orderId" },
+                        { type: "reference", name: "orderId", to: [{ type: 'product' }] },
                         { type: "string", name: "slug" },
                         { type: "number", name: "quantity" },
                     ]
@@ -64,6 +71,12 @@ export const order = defineType({
             title: "Payment Id",
             type: 'string',
             validation: Rule => Rule.required()
+        },
+        {
+            name: "is_done",
+            title: "Done",
+            type: 'boolean',
+            initialValue: false,
         },
     ]
 })

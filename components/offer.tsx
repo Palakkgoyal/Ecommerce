@@ -13,7 +13,7 @@ export default function OfferSlider() {
   const [offers, setOffers] = useState([])
 
   useEffect(() => {
-    const moveSlider = setInterval(slideRight, 3000)
+    // const moveSlider = setInterval(slideRight, 3000)
 
     async function orderOffers() {
       const tempOffers:any = await getOffers()
@@ -23,7 +23,7 @@ export default function OfferSlider() {
 
     orderOffers()
 
-    return () => clearInterval(moveSlider)
+    // return () => clearInterval(moveSlider)
   }, [])
 
   function slideRight() {

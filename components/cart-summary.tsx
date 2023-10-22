@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 export function CartSummary() {
   const { totalPrice, cartCount } = useShoppingCart()
   const { user } = useUser();
-  console.log(!user)
   const isDisabled = !user || cartCount! === 0
   const shippingAmount = cartCount! > 0 ? 5000 : 0
   const totalAmount = totalPrice! + shippingAmount
