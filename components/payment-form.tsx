@@ -106,7 +106,7 @@ export default function PaymentForm() {
           <CardElement className="rounded-md border-[2px] bg-white p-3" />
         </div>
         {/* <button type="submit">Submit</button> */}
-        <Button variant="default" className="w-full max-w-[500px] mx-auto">Submit</Button>
+        <Button variant="default" className="mx-auto w-full max-w-[500px]">Submit</Button>
       </form>
       {loading && <Loader text="Please do not refresh..." />}
     </div>
