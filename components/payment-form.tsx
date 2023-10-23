@@ -15,7 +15,7 @@ export default function PaymentForm() {
   const { user } = useUser();
   const [loading, setLoading] = useState<Boolean>(false)
   const [code, setCode] = useState("")
-  const [orderTotal, setOrderTotal] = useState<Number>(100)
+  const [orderTotal, setOrderTotal] = useState<Number>(1)
   const [applied, setApplied] = useState<boolean>(false)
 
 
@@ -35,7 +35,7 @@ export default function PaymentForm() {
     const discountAmt = (discount / 100) * (+orderTotal)
     const finalAmt = +orderTotal - discountAmt
     setApplied(true)
-    setOrderTotal(finalAmt)
+    // setOrderTotal(finalAmt) TODO UNCOMMENT
   }
   const orderData = cartArr.map((item) => ({
     orderId: {
@@ -51,7 +51,7 @@ export default function PaymentForm() {
   useEffect(() => {
     const orderAmt = cartArr.map((item) => (item[1].price / 100) * item[1].quantity).reduce((a, b) => a + b)
     const shippingAmt = 50
-    setOrderTotal(orderAmt + shippingAmt)
+    // setOrderTotal(orderAmt + shippingAmt)
   }, [])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
