@@ -73,6 +73,12 @@ export const order = defineType({
             validation: Rule => Rule.required()
         },
         {
+            name: "coupon_code",
+            title: "Coupon Code",
+            type: 'string',
+            initialValue: false,
+        },
+        {
             name: "is_done",
             title: "Done",
             type: 'boolean',

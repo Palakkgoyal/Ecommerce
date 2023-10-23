@@ -15,7 +15,7 @@ const client = createClient(config)
 export const POST = async (req: NextRequest, res: NextResponse) => {
     const { data, address, orders } = await req.json();
 
-    const { name, email, phone, total_amt, payment_id } = data
+    const { name, email, phone, total_amt, payment_id, coupon_code } = data
 
     try {
         const order = await client.create({
@@ -27,6 +27,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             orders,
             total_amt,
             payment_id,
+            coupon_code,
         })
 
         return new NextResponse(order._createdAt, { status: 200 });

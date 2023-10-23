@@ -1,7 +1,7 @@
 "use client";
 import { CardElement, useElements, useStripe, AddressElement } from "@stripe/react-stripe-js";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button"
 import { useShoppingCart } from "use-shopping-cart"
 import { useUser } from '@auth0/nextjs-auth0/client';
@@ -10,13 +10,33 @@ import Loader from "./loader"
 export default function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
-  const { cartDetails } = useShoppingCart()
+  const { cartDetails, cartCount } = useShoppingCart()
   const { user } = useUser();
   const [loading, setLoading] = useState<Boolean>(false)
+  const [code, setCode] = useState<String>("")
+  const [orderTotal, setOrderTotal] = useState<Number>(100)
+  const [applied, setApplied] = useState<Boolean>(false) 
 
-  console.log(loading, "loading")
-
+  
   const cartArr = Object.entries(cartDetails!)
+
+  function applyCoupon(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if(applied) return
+    let discount = 0
+    if(code === 'HAPPYUS') {
+      discount = 20
+    }
+    else if(code === 'BIG20' && cartCount && cartCount > 10) {
+      discount = 25
+    }
+
+    const discountAmt = (discount/100)*(+orderTotal)
+    const finalAmt = +orderTotal - discountAmt
+    setApplied(true)
+    setOrderTotal(finalAmt)
+    setCode("")
+  }
   const orderData = cartArr.map((item) => ({
     orderId: {
       _type: 'reference',
@@ -28,9 +48,11 @@ export default function PaymentForm() {
   }))
 
   //Get the total amount of the items purchased
-  const orderAmt = cartArr.map((item) => (item[1].price / 100) * item[1].quantity).reduce((a, b) => a + b)
-  const shippingAmt = 50
-  const orderTotal = orderAmt + shippingAmt
+  useEffect(() => {
+    const orderAmt = cartArr.map((item) => (item[1].price / 100) * item[1].quantity).reduce((a, b) => a + b)
+    const shippingAmt = 50
+    setOrderTotal(orderAmt + shippingAmt)
+  }, [])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,6 +87,7 @@ export default function PaymentForm() {
           email: user?.email,
           payment_id: res?.paymentIntent?.id,
           total_amt: res?.paymentIntent?.amount,
+          coupon_code: code,
         }
         await createOrder(data, address, orders)
       }
@@ -92,6 +115,11 @@ export default function PaymentForm() {
           Pay: {orderTotal}₹
         </h1>
       </div>
+      <form onSubmit={applyCoupon} className="p-5">
+        <label htmlFor="" className="block">Have a coupon code?</label>
+        <input type="text" className="p-[3px] mr-2" disabled={applied} onChange={(e) => setCode(e.target.value)}/>
+        <Button variant="secondary">Apply Now</Button>
+      </form>
       <form onSubmit={onSubmit} className="flex flex-col gap-5 p-5">
         <AddressElement options={{
           mode: 'shipping',
@@ -106,7 +134,7 @@ export default function PaymentForm() {
           <CardElement className="rounded-md border-[2px] bg-white p-3" />
         </div>
         {/* <button type="submit">Submit</button> */}
-        <Button variant="default" className="mx-auto w-full max-w-[500px]">Submit</Button>
+        <Button variant="default" type="submit" className="mx-auto w-full max-w-[500px]">Submit</Button>
       </form>
       {loading && <Loader text="Please do not refresh..." />}
     </div>
