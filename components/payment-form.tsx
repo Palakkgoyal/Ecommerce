@@ -112,7 +112,7 @@ export default function PaymentForm() {
     <div className="relative mx-auto my-10 max-w-7xl rounded-lg border-[2px] border-solid py-5 ">
       <div>
         <h1 className="text-center font-semibold ">
-          Pay: {orderTotal}₹
+          Pay: {+orderTotal}₹
         </h1>
       </div>
       <form onSubmit={applyCoupon} className="p-5">
