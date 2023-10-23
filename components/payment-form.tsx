@@ -7,6 +7,8 @@ import { useShoppingCart } from "use-shopping-cart"
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Input } from "@/components/ui/input"
 import Loader from "./loader"
+import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast"
 
 export default function PaymentForm() {
   const stripe = useStripe();
@@ -17,7 +19,7 @@ export default function PaymentForm() {
   const [code, setCode] = useState("")
   const [orderTotal, setOrderTotal] = useState<Number>(1)
   const [applied, setApplied] = useState<boolean>(false)
-
+  const { toast } = useToast()
 
   const cartArr = Object.entries(cartDetails!)
 
@@ -90,10 +92,21 @@ export default function PaymentForm() {
           coupon_code: code,
         }
         await createOrder(data, address, orders)
+          .then(() => {
+            toast({
+              title: `Order placed`,
+              description: "Your order has been successfully placed!",
+            })
+          })
       }
 
     } catch (error) {
       console.log(error);
+      toast({
+        title: `Uh Oh!`,
+        description: "There was an error placing order!",
+        variant: "destructive"
+      })
     }
     finally {
       setLoading(false)
@@ -105,7 +118,21 @@ export default function PaymentForm() {
       data: orderData,
       address: address,
       orders: orders,
-    });
+    })
+      .catch(() => {
+        toast({
+          title: `Error while saving address`,
+          description: "Please contact seller for this",
+          variant: "destructive",
+          action: (
+            <Link href="https://wa.me/+918989517165">
+              <Button variant="link" className="gap-x-2 whitespace-nowrap" >
+                <span>Contact Seller</span>
+              </Button>
+            </Link>
+          )
+        })
+      })
   }
 
   return (
@@ -126,7 +153,7 @@ export default function PaymentForm() {
           placeholder="Enter Coupon Code"
           className="mr-2 mt-2 h-9 w-[210px] inline-block"
           value={code}
-          onChange={(e) =>  setCode(e.target.value)}
+          onChange={(e) => setCode(e.target.value)}
           disabled={applied}
         />
         <Button variant="secondary">Apply Now</Button>
@@ -136,7 +163,7 @@ export default function PaymentForm() {
           mode: 'shipping',
           allowedCountries: ['IN'],
           fields: {
-            phone: "always"
+            phone: 'always'
           }
         }}
         />
