@@ -167,7 +167,7 @@ export default function PaymentForm() {
           type="text"
           required
           placeholder="Enter Coupon Code"
-          className="mr-2 mt-2 h-9 w-[210px] inline-block"
+          className="mr-2 mt-2 inline-block h-9 w-[210px]"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           disabled={applied}

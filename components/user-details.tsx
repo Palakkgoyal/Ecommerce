@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button"
 
 export default function UserDetails({ user }: any) {
     return (
-        <div className='flex justify-center items-center h-[400px]'>
-            <div className='border-[2px] shadow-md p-5'>
+        <div className='flex h-[400px] items-center justify-center'>
+            <div className='border-[2px] p-5 shadow-md'>
                 <h2 className='text-center'>{user?.name}</h2>
                 <p>{user?.email}</p>
                 <Link href="/api/auth/logout">
-                    <Button variant="outline" className='mt-4 mx-auto'>Logout</Button>
+                    <Button variant="outline" className='mx-auto mt-4'>Logout</Button>
                 </Link>
             </div>
             

@@ -13,7 +13,7 @@ export default function Home() {
   const { cartCount } = useShoppingCart()
 
   if (cartCount === 0) return (
-    <div className="flex justify-center items-center">
+    <div className="flex items-center justify-center">
       <Link href="/">Back to Home</Link>
     </div>
   )

@@ -31,8 +31,8 @@ export default function UserOrders() {
     console.log(orders)
 
     return (
-        <div className="flex justify-center items-center p-5 border-[2px] my-10">
-            <div className="flex flex-col border-[2px] w-full border-red-500 border-solid">
+        <div className="my-10 flex items-center justify-center border-[2px] p-5">
+            <div className="flex w-full flex-col">
                 <div>
                     <h2 className="text-lg font-bold">Your Orders</h2>
                 </div>
@@ -40,7 +40,7 @@ export default function UserOrders() {
                     {orders.length === 0 ? (
                         <div className="mt-8">
                             <Link href="/products">
-                                <Button variant="default">Let's do some shopping 🛒</Button>
+                                <Button variant="default">Let{`'`}s do some shopping 🛒</Button>
                             </Link>
                         </div>
                     ) : (
