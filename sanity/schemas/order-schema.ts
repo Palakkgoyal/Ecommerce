@@ -70,7 +70,7 @@ export const order = defineType({
             name: "payment_id",
             title: "Payment Id",
             type: 'string',
-            validation: Rule => Rule.required()
+            // validation: Rule => Rule.required()
         },
         {
             name: "coupon_code",

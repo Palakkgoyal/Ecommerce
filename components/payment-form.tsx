@@ -2,25 +2,26 @@
 import { CardElement, useElements, useStripe, AddressElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button"
-import { useShoppingCart } from "use-shopping-cart"
+import { Button } from "@/components/ui/button";
+import { useShoppingCart } from "use-shopping-cart";
 import { useUser } from '@auth0/nextjs-auth0/client';
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import Loader from "./loader"
 import Link from "next/link";
-import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
-  const { cartDetails, cartCount } = useShoppingCart()
+  const { cartDetails, cartCount, clearCart } = useShoppingCart()
   const { user } = useUser();
   const [loading, setLoading] = useState<Boolean>(false)
   const [code, setCode] = useState("")
-  const [orderTotal, setOrderTotal] = useState<Number>(1)
+  const [orderTotal, setOrderTotal] = useState<Number>(0)
   const [applied, setApplied] = useState<boolean>(false)
   const { toast } = useToast()
-
+  const router = useRouter()
   const cartArr = Object.entries(cartDetails!)
 
   function applyCoupon(e: React.FormEvent<HTMLFormElement>) {
@@ -46,7 +47,7 @@ export default function PaymentForm() {
     const discountAmt = (discount / 100) * (+orderTotal)
     const finalAmt = +orderTotal - discountAmt
     setApplied(true)
-    // setOrderTotal(finalAmt) TODO UNCOMMENT
+    setOrderTotal(finalAmt)
   }
   const orderData = cartArr.map((item) => ({
     orderId: {
@@ -60,54 +61,59 @@ export default function PaymentForm() {
 
   //Get the total amount of the items purchased
   useEffect(() => {
-    const orderAmt = cartArr.map((item) => (item[1].price / 100) * item[1].quantity).reduce((a, b) => a + b)
+    const orderArr = cartArr.map((item) => (item[1].price / 100) * item[1].quantity)
+    const orderAmt = orderArr.length > 0 ? orderArr.reduce((a, b) => a + b) : 0
     const shippingAmt = 50
-    // setOrderTotal(orderAmt + shippingAmt)
+    setOrderTotal(orderAmt + shippingAmt)
   }, [])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true)
-    const cardElement = elements?.getElement("card");
+    // const cardElement = elements?.getElement("card");
     const addressElement = elements?.getElement("address")
 
     const addressData = await addressElement?.getValue();
     const complete = addressData?.complete
     const value = addressData?.value
     try {
-      if (!stripe || !cardElement || !complete) {
+      // if (!stripe || !cardElement || !complete) {
+      if (!stripe || !complete) {
         setLoading(false)
         return null
       }
-      const { data } = await axios.post("/api/checkout", {
-        data: { amount: orderTotal },
-        address: value,
-      });
-      const clientSecret = data;
+      // const { data } = await axios.post("/api/checkout", {
+      //   data: { amount: orderTotal },
+      //   address: value,
+      // });
+      // const clientSecret = data;
 
-      const res = await stripe?.confirmCardPayment(clientSecret, {
-        payment_method: { card: cardElement },
-      });
+      // const res = await stripe?.confirmCardPayment(clientSecret, {
+      //   payment_method: { card: cardElement },
+      // });
 
-      if (res?.paymentIntent?.status === "succeeded") {
-        const address = [{ ...value?.address, _key: "address_key" }]
-        const orders = orderData
-        const data = {
-          name: value?.name,
-          phone: value?.phone,
-          email: user?.email,
-          payment_id: res?.paymentIntent?.id,
-          total_amt: res?.paymentIntent?.amount,
-          coupon_code: code,
-        }
-        await createOrder(data, address, orders)
-          .then(() => {
-            toast({
-              title: `Order placed`,
-              description: "Your order has been successfully placed!",
-            })
-          })
+      // if (res?.paymentIntent?.status === "succeeded") {
+      const address = [{ ...value?.address, _key: "address_key" }]
+      const orders = orderData
+      const data: any = {
+        name: value?.name,
+        phone: value?.phone,
+        email: user?.email,
+        payment_id: "temp_id",
+        total_amt: orderTotal,
+        coupon_code: code,
       }
+      await createOrder(data, address, orders)
+        .then(async () => {
+          await clearCart()
+        })
+        .then(() => {
+          toast({
+            title: `Order placed`,
+            description: "We will contact you soon regarding payment",
+          })
+        })
+      // }
 
     } catch (error) {
       console.log(error);
@@ -119,6 +125,7 @@ export default function PaymentForm() {
     }
     finally {
       setLoading(false)
+      router.push("/")
     }
   };
 
@@ -176,12 +183,12 @@ export default function PaymentForm() {
           }
         }}
         />
-        <label htmlFor="card-element">Credit or debit card</label>
-        <div id="card-element" className="form-control">
+        {/* <label htmlFor="card-element">Credit or debit card</label> */}
+        {/* <div id="card-element" className="form-control">
           <CardElement className="rounded-md border-[2px] bg-white p-3" />
-        </div>
+        </div> */}
         {/* <button type="submit">Submit</button> */}
-        <Button variant="default" type="submit" className="mx-auto w-full max-w-[500px]">Submit</Button>
+        <Button variant="default" type="submit" className="mx-auto w-full max-w-[500px]">Place Order</Button>
       </form>
       {loading && <Loader text="Please do not refresh..." />}
     </div>

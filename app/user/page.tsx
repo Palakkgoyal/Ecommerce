@@ -1,19 +1,24 @@
 import React from "react"
 import Login from "@/components/login";
 import UserDetails from "@/components/user-details"
+import UserOrders from "@/components/user-orders";
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function Page() {
     const res = await getSession();
     const user = res?.user
-    
+    console.log(user, "user")
     return (
         user ? (
             <div>
                 <UserDetails user={user} />
+                {/* <UserOrders /> */}
             </div>
         ) : (
-            <Login />
+            <div>
+                <Login />
+                <UserOrders />
+            </div>
         )
     );
 }
