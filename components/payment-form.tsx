@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button"
 import { useShoppingCart } from "use-shopping-cart"
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { Input } from "@/components/ui/input"
 import Loader from "./loader"
 
 export default function PaymentForm() {
@@ -13,29 +14,28 @@ export default function PaymentForm() {
   const { cartDetails, cartCount } = useShoppingCart()
   const { user } = useUser();
   const [loading, setLoading] = useState<Boolean>(false)
-  const [code, setCode] = useState<String>("")
+  const [code, setCode] = useState("")
   const [orderTotal, setOrderTotal] = useState<Number>(100)
-  const [applied, setApplied] = useState<Boolean>(false) 
+  const [applied, setApplied] = useState<boolean>(false)
 
-  
+
   const cartArr = Object.entries(cartDetails!)
 
   function applyCoupon(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if(applied) return
+    if (applied) return
     let discount = 0
-    if(code === 'HAPPYUS') {
+    if (code === 'HAPPYUS') {
       discount = 20
     }
-    else if(code === 'BIG20' && cartCount && cartCount > 10) {
+    else if (code === 'BIG20' && cartCount && cartCount > 10) {
       discount = 25
     }
 
-    const discountAmt = (discount/100)*(+orderTotal)
+    const discountAmt = (discount / 100) * (+orderTotal)
     const finalAmt = +orderTotal - discountAmt
     setApplied(true)
     setOrderTotal(finalAmt)
-    setCode("")
   }
   const orderData = cartArr.map((item) => ({
     orderId: {
@@ -116,8 +116,19 @@ export default function PaymentForm() {
         </h1>
       </div>
       <form onSubmit={applyCoupon} className="p-5">
-        <label htmlFor="" className="block">Have a coupon code?</label>
-        <input type="text" className="p-[3px] mr-2" disabled={applied} onChange={(e) => setCode(e.target.value)}/>
+        <label htmlFor="coupon" className="block">Have a coupon code?</label>
+        {/* <input type="text" className="p-[3px] mr-2" disabled={applied} onChange={(e) => setCode(e.target.value)}/> */}
+        <Input
+          id="coupon"
+          name="coupon"
+          type="text"
+          required
+          placeholder="Enter Coupon Code"
+          className="mr-2 mt-2 h-9 w-[210px] inline-block"
+          value={code}
+          onChange={(e) =>  setCode(e.target.value)}
+          disabled={applied}
+        />
         <Button variant="secondary">Apply Now</Button>
       </form>
       <form onSubmit={onSubmit} className="flex flex-col gap-5 p-5">
