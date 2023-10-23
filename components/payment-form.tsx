@@ -114,7 +114,7 @@ export default function PaymentForm() {
   };
 
   async function createOrder(orderData: any, address: any, orders: any) {
-    const { data } = await axios.post("/api/createOrder", {
+    await axios.post("/api/createOrder", {
       data: orderData,
       address: address,
       orders: orders,
