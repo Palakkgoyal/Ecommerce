@@ -1,11 +1,21 @@
 import React from 'react'
-import { getSession } from '@auth0/nextjs-auth0';
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
-export default function UserDetails() {
-    
+export default function UserDetails({ user }: any) {
     return (
-        <div>
+        <div className='flex justify-center items-center h-[400px]'>
+            <div className='border-[2px] shadow-md p-5'>
+                <h2 className='text-center'>{user?.name}</h2>
+                <p>{user?.email}</p>
+                <Link href="/api/auth/logout" className='mt-2'>
+                    <Button variant="outline">Logout</Button>
+                </Link>
 
+            </div>
+            
+            {/* <img src={user.picture} alt={user.name} /> */}
         </div>
     )
 }

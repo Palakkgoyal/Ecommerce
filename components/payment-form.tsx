@@ -26,12 +26,21 @@ export default function PaymentForm() {
   function applyCoupon(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (applied) return
+
     let discount = 0
     if (code === 'HAPPYUS') {
       discount = 20
     }
     else if (code === 'BIG20' && cartCount && cartCount > 10) {
-      discount = 25
+      discount = 20
+    }
+    else {
+      toast({
+        title: `Uh Oh!`,
+        description: "No such coupon code available",
+        variant: "destructive"
+      })
+      return
     }
 
     const discountAmt = (discount / 100) * (+orderTotal)

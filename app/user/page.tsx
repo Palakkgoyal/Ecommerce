@@ -1,6 +1,6 @@
 import React from "react"
-import Link from "next/link"
 import Login from "@/components/login";
+import UserDetails from "@/components/user-details"
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function Page() {
@@ -10,10 +10,7 @@ export default async function Page() {
     return (
         user ? (
             <div>
-                {/* <img src={user.picture} alt={user.name} /> */}
-                <h2>{user.name}</h2>
-                <p>{user.email}</p>
-                <Link href="/api/auth/logout">Logout</Link>
+                <UserDetails user={user} />
             </div>
         ) : (
             <Login />
@@ -22,10 +19,6 @@ export default async function Page() {
 }
 
 // 1. First Time customer discount= Get 10% on first purchase from our website.Use code "FIRSTBUY" to redeem the discount.
-
-// 2. Special offer for website launch= Get 20% off till date 30 October. Use code "HAPPYUS" to redeem the discount.
-
-// 3. Bulk order=Discounted price on bulk order that will be 25% on total.( 10+ items) Use code"BIG20"
 
 // 4. Loyalty Program=Customer can earn points with each purchase that they can redeem in the next purchase.5 points on each purchase. Login is must for this program.
 
