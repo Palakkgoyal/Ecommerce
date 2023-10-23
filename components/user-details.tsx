@@ -9,10 +9,9 @@ export default function UserDetails({ user }: any) {
             <div className='border-[2px] shadow-md p-5'>
                 <h2 className='text-center'>{user?.name}</h2>
                 <p>{user?.email}</p>
-                <Link href="/api/auth/logout" className='mt-2'>
-                    <Button variant="outline">Logout</Button>
+                <Link href="/api/auth/logout">
+                    <Button variant="outline" className='mt-4 mx-auto'>Logout</Button>
                 </Link>
-
             </div>
             
             {/* <img src={user.picture} alt={user.name} /> */}
