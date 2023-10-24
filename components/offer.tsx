@@ -13,17 +13,27 @@ export default function OfferSlider() {
   const [offers, setOffers] = useState([])
 
   useEffect(() => {
-    // const moveSlider = setInterval(slideRight, 3000)
+    const moveSlider = setInterval(slideRight, 3000)
+    async function getOffers() {
+      const offers = await client.fetch<SanityOffers[]>(groq`*[_type == "offer"] | order(_createdAt desc) [0...4] {
+          _id,
+          _createdAt,
+          name,
+          images,
+          description,
+       }`)
+    
+      return offers
+    }
 
     async function orderOffers() {
       const tempOffers:any = await getOffers()
-      console.log(tempOffers, "offers")
       setOffers(tempOffers)
     }
 
     orderOffers()
 
-    // return () => clearInterval(moveSlider)
+    return () => clearInterval(moveSlider)
   }, [])
 
   function slideRight() {
@@ -68,16 +78,4 @@ export default function OfferSlider() {
       </div>
     </div>
   )
-}
-
-async function getOffers() {
-  const offers = await client.fetch<SanityOffers[]>(groq`*[_type == "offer"] | order(_createdAt desc) [0...4] {
-      _id,
-      _createdAt,
-      name,
-      images,
-      description,
-   }`)
-
-  return offers
 }

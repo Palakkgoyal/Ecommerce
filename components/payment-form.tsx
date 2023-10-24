@@ -18,7 +18,7 @@ export default function PaymentForm() {
   const { user } = useUser();
   const [loading, setLoading] = useState<Boolean>(false)
   const [code, setCode] = useState("")
-  const [orderTotal, setOrderTotal] = useState<Number>(1)
+  const [orderTotal, setOrderTotal] = useState<Number>(0)
   const [applied, setApplied] = useState<boolean>(false)
   const { toast } = useToast()
   const router = useRouter()
@@ -47,7 +47,7 @@ export default function PaymentForm() {
     const discountAmt = (discount / 100) * (+orderTotal)
     const finalAmt = +orderTotal - discountAmt
     setApplied(true)
-    // setOrderTotal(finalAmt)
+    setOrderTotal(finalAmt)
   }
   const orderData = cartArr.map((item) => ({
     orderId: {
@@ -64,37 +64,37 @@ export default function PaymentForm() {
     const orderArr = cartArr.map((item) => (item[1].price / 100) * item[1].quantity)
     const orderAmt = orderArr.length > 0 ? orderArr.reduce((a, b) => a + b) : 0
     const shippingAmt = 50
-    // setOrderTotal(orderAmt + shippingAmt)
+    setOrderTotal(orderAmt + shippingAmt)
   }, [])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true)
-    const cardElement = elements?.getElement("card");
+    // const cardElement = elements?.getElement("card");
     const addressElement = elements?.getElement("address")
 
     const addressData = await addressElement?.getValue();
     const complete = addressData?.complete
     const value = addressData?.value
     try {
-      if (!stripe || !cardElement || !complete) {
-      // if (!stripe || !complete) {
+      // if (!stripe || !cardElement || !complete) {
+      if (!stripe || !complete) {
         setLoading(false)
         return null
       }
-      const { data } = await axios.post("/api/checkout", {
-        data: { amount: orderTotal },
-        address: value,
-      });
-      const clientSecret = data;
+      // const { data } = await axios.post("/api/checkout", {
+      //   data: { amount: orderTotal },
+      //   address: value,
+      // });
+      // const clientSecret = data;
 
-      const res = await stripe?.confirmCardPayment(clientSecret, {
-        payment_method: { card: cardElement },
-      });
+      // const res = await stripe?.confirmCardPayment(clientSecret, {
+      //   payment_method: { card: cardElement },
+      // });
 
-      console.log(res, "res")
+      // console.log(res, "res")
 
-      if (res?.paymentIntent?.status === "succeeded") {
+      // if (res?.paymentIntent?.status === "succeeded") {
       const address = [{ ...value?.address, _key: "address_key" }]
       const orders = orderData
       const data: any = {
@@ -115,7 +115,7 @@ export default function PaymentForm() {
             description: "We will contact you soon regarding payment",
           })
         })
-      }
+      // }
 
     } catch (error) {
       console.log(error);
@@ -185,10 +185,10 @@ export default function PaymentForm() {
           }
         }}
         />
-        <label htmlFor="card-element">Credit or debit card</label>
+        {/* <label htmlFor="card-element">Credit or debit card</label>
         <div id="card-element" className="form-control">
           <CardElement className="rounded-md border-[2px] bg-white p-3" />
-        </div>
+        </div> */}
         <Button variant="default" type="submit" className="mx-auto w-full max-w-[500px]">Place Order</Button>
       </form>
       {loading && <Loader text="Please do not refresh..." />}
