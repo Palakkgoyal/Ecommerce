@@ -18,7 +18,7 @@ export default function PaymentForm() {
   const { user } = useUser();
   const [loading, setLoading] = useState<Boolean>(false)
   const [code, setCode] = useState("")
-  const [orderTotal, setOrderTotal] = useState<Number>(0)
+  const [orderTotal, setOrderTotal] = useState<Number>(1)
   const [applied, setApplied] = useState<boolean>(false)
   const { toast } = useToast()
   const router = useRouter()
@@ -47,7 +47,7 @@ export default function PaymentForm() {
     const discountAmt = (discount / 100) * (+orderTotal)
     const finalAmt = +orderTotal - discountAmt
     setApplied(true)
-    setOrderTotal(finalAmt)
+    // setOrderTotal(finalAmt)
   }
   const orderData = cartArr.map((item) => ({
     orderId: {
@@ -64,7 +64,7 @@ export default function PaymentForm() {
     const orderArr = cartArr.map((item) => (item[1].price / 100) * item[1].quantity)
     const orderAmt = orderArr.length > 0 ? orderArr.reduce((a, b) => a + b) : 0
     const shippingAmt = 50
-    setOrderTotal(orderAmt + shippingAmt)
+    // setOrderTotal(orderAmt + shippingAmt)
   }, [])
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
