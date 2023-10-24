@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
       amount: Number(amount) * 100,
       currency: "INR",
       shipping: address,
+      payment_method_types: ['card'],
     });
 
     return new NextResponse(paymentIntent.client_secret, { status: 200 });
