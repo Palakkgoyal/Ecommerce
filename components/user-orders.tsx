@@ -47,7 +47,7 @@ export default function UserOrders() {
                         </div>
                     ) : (
                         <div className="mt-8 flex gap-4 flex-wrap text-sm">
-                            {allOrders.map((order, idx) => {
+                            {allOrders.map((order: any) => {
                                 const { _id, orders, total_amt, address } = order
                                 return (
                                     <div key={_id} className="border-[2px] flex flex-col gap-2 w-full max-w-[400px] shadow-sm p-5 rounded-lg">
