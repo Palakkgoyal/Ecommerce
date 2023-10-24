@@ -12,12 +12,11 @@ export default async function Page() {
         user ? (
             <div>
                 <UserDetails user={user} />
-                {/* <UserOrders /> */}
+                <UserOrders />
             </div>
         ) : (
             <div>
                 <Login />
-                <UserOrders />
             </div>
         )
     );

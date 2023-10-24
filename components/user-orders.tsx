@@ -9,10 +9,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function UserOrders() {
     const [allOrders, setAllOrders] = useState<SanityProduct[]>([])
-    const { user, error, isLoading } = useUser();
-
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>{error.message}</div>;
+    const { user } = useUser();
 
     async function getOrders() {
         const orders = await client.fetch<SanityProduct[]>(groq`*[_type=="order" && email == '${user?.email}'] {
