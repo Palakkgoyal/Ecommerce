@@ -2,6 +2,7 @@ import React from "react"
 import Login from "@/components/login";
 import UserDetails from "@/components/user-details"
 import UserOrders from "@/components/user-orders";
+import UserPoints from "@/components/user-points";
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function Page() {
@@ -11,11 +12,13 @@ export default async function Page() {
     return (
         user ? (
             <div>
+                <UserPoints />
                 <UserDetails user={user} />
-                <UserOrders />
+                <UserOrders user={user} />
             </div>
         ) : (
             <div>
+                <UserPoints />
                 <Login />
             </div>
         )

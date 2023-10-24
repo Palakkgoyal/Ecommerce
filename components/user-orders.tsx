@@ -5,11 +5,9 @@ import { groq } from "next-sanity"
 import { SanityProduct } from "@/config/inventory"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { useUser } from '@auth0/nextjs-auth0/client';
 
-export default function UserOrders() {
+export default function UserOrders({ user }: any) {
     const [allOrders, setAllOrders] = useState<SanityProduct[]>([])
-    const { user } = useUser();
 
     async function getOrders() {
         const orders = await client.fetch<SanityProduct[]>(groq`*[_type=="order" && email == '${user?.email}'] {
@@ -28,8 +26,6 @@ export default function UserOrders() {
     useEffect(() => {
         getOrders()
     }, [])
-
-    console.log(allOrders)
 
 
     return (
